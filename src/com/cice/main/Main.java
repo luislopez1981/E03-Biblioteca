@@ -49,7 +49,25 @@ public class Main {
             System.out.print("ELIJA UNA OPCIÓN ");
             opcion = sc.nextInt();
             
+            switch(opcion){
+            case 1: 
+                mostrarPrestados();
+                break;
+            case 2: 
+                anterioresFecha();
+                break;
+            case 3:
+                imprimirListado();
+                break;
+            case 4:
+                imprimirListadoDiferenciandoPrestado();
+                break;
+            case 0:
+                System.out.println("GRACIAS POR UTILIZAR BIBLIOTECA CICE");
+                
+        }
         } while (opcion != 0);
+        
         
         
         
@@ -67,14 +85,52 @@ public class Main {
     }
     
     private static void mostrarPrestados(){
+        
+        System.out.println("TITULOS PRESTADOS: ");
         for(EntidadBaseDTO objeto:lista){
             if(objeto instanceof IPrestable){
                 boolean estado = ((IPrestable) objeto).esPrestado();
                 
                 if(estado){
-                    System.out.println("Prestado: " + objeto.
+                    System.out.println("Prestado: " + objeto.getNombre());
                 }
+                
             }
         }
     }
+    private static void anterioresFecha(){
+        int opcion = 0;
+        int fecha = 0;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("INTRODUZCA LA FECHA LÍMITE DE PUBLICACIÓN: ");
+        opcion = sc.nextInt();
+        
+        for(EntidadBaseDTO objeto:lista){
+            fecha = Integer.parseInt(objeto.getFechaPublicacion());
+            if(fecha <= opcion){
+                System.out.println("NOMBRE " + objeto.getNombre());
+            }
+        }
+    }
+    private static void imprimirListado(){
+        for(EntidadBaseDTO objeto:lista){
+            System.out.println("NOMBRE: "+ objeto.getNombre());
+        }
+    }
+
+    private static void imprimirListadoDiferenciandoPrestado() {
+        for(EntidadBaseDTO objeto : lista) {
+            if(objeto instanceof IPrestable) {
+                boolean estado = ((IPrestable) objeto).esPrestado();
+                
+                if(estado) {
+                    System.out.println("Prestado: " + objeto.getNombre());
+                } else {
+                    System.out.println("No prestado: " + objeto.getNombre());
+                }
+            }
+            
+        }
+    }
+
 }
