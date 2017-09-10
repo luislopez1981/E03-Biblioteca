@@ -45,7 +45,8 @@ public class Main {
             try {
                 opcion = sc.nextInt();
                 
-                 switch (opcion) {
+                if(opcion >0 && opcion <6){
+                switch (opcion) {
                     case 1:
                         mostrarPrestados();
                         break;
@@ -65,6 +66,10 @@ public class Main {
                         System.out.println("=   BIBLIOTECA  CICE   =");
                         System.out.println("========================");
                 }
+            } else {
+                    System.out.println("NUMERO NO VALIDO");
+                }
+                
             } 
             catch (InputMismatchException e) {
                 System.out.println("OPCION INTRODUCIDA INCORRECTA.");
